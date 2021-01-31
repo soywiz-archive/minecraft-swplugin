@@ -1,3 +1,5 @@
+@file:Suppress("UNUSED_VARIABLE")
+
 import dev.ethp.bukkit.gradle.extension.*
 
 plugins {
@@ -125,16 +127,3 @@ tasks {
         destinationDir = File("D:\\minecraft-server\\minecraft\\data\\plugins")
     }
 }
-
-
-/*
-task kotlinJar (type: Jar) {
-    archiveBaseName.set("kotlin-runtime")
-    //from sourceSets.all
-    from configurations.kotlinRuntime
-}
-
-jar.dependsOn(kotlinJar)
-*/
-
-//println(sourceSets)
