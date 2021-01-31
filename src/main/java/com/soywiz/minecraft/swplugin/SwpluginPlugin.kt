@@ -1,7 +1,7 @@
-package com.soywiz.minecraft.repair
+package com.soywiz.minecraft.swplugin
 
-import com.soywiz.minecraft.repair.service.*
-import com.soywiz.minecraft.repair.util.*
+import com.soywiz.minecraft.swplugin.service.*
+import com.soywiz.minecraft.swplugin.util.*
 import org.bukkit.*
 import org.bukkit.command.*
 import org.bukkit.entity.*
@@ -11,7 +11,7 @@ import org.bukkit.plugin.java.*
 import kotlin.math.*
 
 @Suppress("unused")
-class BukkitPlugin : JavaPlugin() {
+class SwpluginPlugin : JavaPlugin() {
     companion object {
         val WHERE_METADATA_KEY = "where_command"
     }

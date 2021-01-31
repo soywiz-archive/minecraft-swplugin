@@ -1,9 +1,9 @@
-package com.soywiz.minecraft.repair.service
+package com.soywiz.minecraft.swplugin.service
 
-import com.soywiz.minecraft.repair.*
+import com.soywiz.minecraft.swplugin.*
 import org.bukkit.*
 
-class PlacesService(val plugin: BukkitPlugin) {
+class PlacesService(val plugin: SwpluginPlugin) {
     fun setPlace(name: String, location: Location) {
         plugin.config.set("locations.$name", location)
         plugin.saveConfig()

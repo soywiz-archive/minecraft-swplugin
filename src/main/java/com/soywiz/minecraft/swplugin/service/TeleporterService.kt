@@ -1,6 +1,6 @@
-package com.soywiz.minecraft.repair.service
+package com.soywiz.minecraft.swplugin.service
 
-import com.soywiz.minecraft.repair.util.*
+import com.soywiz.minecraft.swplugin.util.*
 import org.bukkit.*
 import org.bukkit.block.*
 import org.bukkit.block.CommandBlock

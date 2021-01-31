@@ -1,4 +1,4 @@
-package com.soywiz.minecraft.repair.service
+package com.soywiz.minecraft.swplugin.service
 
 import org.bukkit.entity.*
 import org.bukkit.inventory.*

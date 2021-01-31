@@ -37,7 +37,7 @@ fun BukkitExtension.command(name: String, block: CommandExtension.() -> Unit) {
 
 bukkit {
     name("swplugin")
-    main("com.soywiz.minecraft.repair.BukkitPlugin")
+    main("com.soywiz.minecraft.swplugin.SwpluginPlugin")
     description("A simple plugin written in Kotlin with some useful commands.")
     author("soywiz")
 
