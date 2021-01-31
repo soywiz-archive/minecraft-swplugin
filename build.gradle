@@ -52,6 +52,41 @@ bukkit {
         description 'Shows your current position'
         usage 'Usage: /where'
     }
+
+    command 'teleporter', {
+        description 'Creates a bidirectional teleporter between this position and the position stored as /where'
+        usage 'Usage: /teleporter'
+    }
+
+    command 'unteleporter', {
+        description 'Removes a near teleporter/command block'
+        usage 'Usage: /unteleporter'
+    }
+
+    command 'firework', {
+        description 'Adds 64 firework rockets'
+        usage 'Usage: /firework'
+    }
+
+    command 'remember', {
+        description 'Saves the current position with a name'
+        usage 'Usage: /remember <name>'
+    }
+
+    command 'forget', {
+        description 'Removes the named place'
+        usage 'Usage: /forget <name>'
+    }
+
+    command 'go', {
+        description 'Teleports to the saved location'
+        usage 'Usage: /go <name>'
+    }
+
+    command 'places', {
+        description 'Lists all available places to go'
+        usage 'Usage: /places'
+    }
 }
 
 sourceCompatibility = 1.8
@@ -76,6 +111,12 @@ jar {
     from {
         configurations.kotlinRuntime.collect {it.isDirectory() ? it : zipTree(it) }
     }
+}
+
+task deploy(type: Copy) {
+    dependsOn jar
+    from jar
+    destinationDir = new File("D:\\minecraft-server\\minecraft\\data\\plugins")
 }
 
 /*
