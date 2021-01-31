@@ -1,8 +1,10 @@
 package com.soywiz.minecraft.repair
 
+import org.bukkit.*
 import org.bukkit.entity.Player
-import org.bukkit.World
 import org.bukkit.command.*
+import org.bukkit.inventory.*
+import org.bukkit.inventory.meta.*
 
 class RepairCommand : CommandExecutor {
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<String>): Boolean {
@@ -25,6 +27,20 @@ class RepairCommand : CommandExecutor {
 
     private fun repair(player: Player) {
         println("    !!! Repair plugin player: $player")
-        player.itemInHand.durability = 0.toShort()
+        for (item in player.inventory.contents) {
+            if (item == null) continue
+            item.setSafeDurability(0)
+        }
+        player.sendMessage("The whole inventory was repaired")
+        //player.teleport(Location())
+        //player.itemInHand.durability = 0.toShort()
+    }
+
+    fun ItemStack.setSafeDurability(value: Int) {
+        val meta = itemMeta as? Damageable
+        if (meta != null) {
+            meta.damage = value
+            itemMeta = meta as ItemMeta
+        }
     }
 }

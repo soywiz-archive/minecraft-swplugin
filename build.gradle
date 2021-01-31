@@ -3,7 +3,7 @@ plugins {
     id 'dev.ethp.bukkit' version '0.2.2'
     id 'org.jetbrains.kotlin.jvm' version '1.4.21'
     id 'idea'
-    id 'com.github.johnrengelman.shadow' version '2.0.4'
+    //id 'com.github.johnrengelman.shadow' version '2.0.4'
 }
 
 group 'com.soywiz.minecraft'
@@ -14,10 +14,15 @@ repositories {
     mavenCentral()
 }
 
+configurations {
+    kotlinRuntime
+}
+
 dependencies {
     bukkitApi()
     //vaultApi()
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    compile("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    kotlinRuntime("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
 }
@@ -42,6 +47,11 @@ bukkit {
         description 'Allows repairing items'
         usage 'Usage: /repair'
     }
+
+    command 'where', {
+        description 'Shows your current position'
+        usage 'Usage: /where'
+    }
 }
 
 sourceCompatibility = 1.8
@@ -61,3 +71,21 @@ compileKotlin {
 compileTestKotlin {
     kotlinOptions.jvmTarget = "1.8"
 }
+
+jar {
+    from {
+        configurations.kotlinRuntime.collect {it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
+/*
+task kotlinJar (type: Jar) {
+    archiveBaseName.set("kotlin-runtime")
+    //from sourceSets.all
+    from configurations.kotlinRuntime
+}
+
+jar.dependsOn(kotlinJar)
+*/
+
+//println(sourceSets)
