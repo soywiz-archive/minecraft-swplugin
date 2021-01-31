@@ -43,18 +43,27 @@ bukkit {
         version '1.15'
     }
 
+    // Misc
+
     command 'repair', {
-        description 'Allows repairing items'
+        description 'Repair all the items in the inventory. Works standalone and on a command block'
         usage 'Usage: /repair'
     }
 
+    command 'firework', {
+        description 'Gives you 64 Firework Rockets'
+        usage 'Usage: /firework'
+    }
+
+    // Command-block teleporters
+
     command 'where', {
-        description 'Shows your current position'
+        description 'Shows your current position and stores it to be used with /teleporter'
         usage 'Usage: /where'
     }
 
     command 'teleporter', {
-        description 'Creates a bidirectional teleporter between this position and the position stored as /where'
+        description 'Creates a bidirectional teleporter between this position and the position stored with /where'
         usage 'Usage: /teleporter'
     }
 
@@ -63,10 +72,7 @@ bukkit {
         usage 'Usage: /unteleporter'
     }
 
-    command 'firework', {
-        description 'Adds 64 firework rockets'
-        usage 'Usage: /firework'
-    }
+    // Named teleport commands
 
     command 'remember', {
         description 'Saves the current position with a name'
