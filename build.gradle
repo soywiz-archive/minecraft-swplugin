@@ -1,6 +1,9 @@
 plugins {
     id 'java'
     id 'dev.ethp.bukkit' version '0.2.2'
+    id 'org.jetbrains.kotlin.jvm' version '1.4.21'
+    id 'idea'
+    id 'com.github.johnrengelman.shadow' version '2.0.4'
 }
 
 group 'com.soywiz.minecraft'
@@ -14,6 +17,7 @@ repositories {
 dependencies {
     bukkitApi()
     //vaultApi()
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
 }
@@ -38,4 +42,22 @@ bukkit {
         description 'Allows repairing items'
         usage 'Usage: /repair'
     }
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+idea {
+    module {
+        downloadJavadoc = true
+        downloadSources = true
+    }
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "1.8"
 }
