@@ -1,0 +1,41 @@
+plugins {
+    id 'java'
+    id 'dev.ethp.bukkit' version '0.2.2'
+}
+
+group 'com.soywiz.minecraft'
+//name = 'swrepair'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    bukkitApi()
+    //vaultApi()
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+bukkit {
+    name 'repair'
+    main 'com.soywiz.minecraft.repair.BukkitPlugin'
+
+    description 'A simple plugin for repairing.'
+
+    author 'soywiz'
+
+    api {
+        version '1.15'
+    }
+
+    command 'repair', {
+        description 'Allows repairing items'
+        usage 'Usage: /repair'
+    }
+}
