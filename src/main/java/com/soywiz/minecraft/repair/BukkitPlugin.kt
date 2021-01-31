@@ -22,7 +22,7 @@ class BukkitPlugin : JavaPlugin() {
 
     override fun onEnable() {
         command("repair") {
-            setSimpleExecutor {
+            executor {
                 if (senderPlayer != null) {
                     repair.repair(senderPlayer)
                 }
@@ -37,7 +37,7 @@ class BukkitPlugin : JavaPlugin() {
             }
         }
         command("where") {
-            setSimpleExecutor {
+            executor {
                 if (senderEntity != null) {
                     val location = senderEntity.location
                     val coordsString = "${location.x.toInt()} ${location.y.roundToInt()} ${location.z.toInt()}"
@@ -47,7 +47,7 @@ class BukkitPlugin : JavaPlugin() {
             }
         }
         command("teleporter") {
-            setSimpleExecutor {
+            executor {
                 val currentLocation = senderEntity?.location
                 val savedLocation = senderEntity?.getMetadata(WHERE_METADATA_KEY)?.firstOrNull()?.value()
                 if (savedLocation is Location && currentLocation is Location) {
@@ -60,20 +60,20 @@ class BukkitPlugin : JavaPlugin() {
             }
         }
         command("unteleporter") {
-            setSimpleExecutor {
+            executor {
                 if (senderEntity != null) {
                     teleporters.locateCommandBlock(senderEntity.world, senderEntity.location)?.type = Material.AIR
                 }
             }
         }
         command("firework") {
-            setSimpleExecutor {
+            executor {
                 val player = sender as Player
                 player.inventory.addItem(ItemStack(Material.FIREWORK_ROCKET, 64))
             }
         }
         command("remember") {
-            setSimpleExecutor {
+            executor {
                 val player = sender as Player
                 if (args.isNotEmpty()) {
                     val name = args[0]
@@ -83,8 +83,8 @@ class BukkitPlugin : JavaPlugin() {
             }
         }
         command("forget") {
-            setSimpleCompleter { places.listPlaces() }
-            setSimpleExecutor {
+            completer { places.listPlaces() }
+            executor {
                 if (args.isNotEmpty()) {
                     val name = args[0]
                     places.removePlace(name)
@@ -93,8 +93,8 @@ class BukkitPlugin : JavaPlugin() {
             }
         }
         command("go") {
-            setSimpleCompleter { places.listPlaces() }
-            setSimpleExecutor {
+            completer { places.listPlaces() }
+            executor {
                 val player = sender as Player
                 if (args.isNotEmpty()) {
                     val name = args[0]
@@ -110,7 +110,7 @@ class BukkitPlugin : JavaPlugin() {
             }
         }
         command("places") {
-            setSimpleExecutor {
+            executor {
                 senderPlayer?.sendMessage("Places: " + places.listPlaces().joinToString(", "))
             }
         }

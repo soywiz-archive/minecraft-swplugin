@@ -14,14 +14,14 @@ class CommandExecInfo(
     val senderCommandBlock = sender as? BlockCommandSender?
 }
 
-fun PluginCommand.setSimpleExecutor(block: CommandExecInfo.() -> Unit) {
+fun PluginCommand.executor(block: CommandExecInfo.() -> Unit) {
     setExecutor { sender, command, label, args ->
         block(CommandExecInfo(sender, command, label, args))
         true
     }
 }
 
-fun PluginCommand.setSimpleCompleter(block: CommandExecInfo.() -> List<String>?) {
+fun PluginCommand.completer(block: CommandExecInfo.() -> List<String>?) {
     setTabCompleter { sender, command, alias, args ->
         block(CommandExecInfo(sender, command, label, args))
     }
