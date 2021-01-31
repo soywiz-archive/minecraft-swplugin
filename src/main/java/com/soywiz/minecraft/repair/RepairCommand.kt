@@ -1,38 +1,30 @@
-package com.soywiz.minecraft.repair;
+package com.soywiz.minecraft.repair
 
-import org.bukkit.World;
-import org.bukkit.block.Block;
-import org.bukkit.command.BlockCommandSender;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.meta.Damageable;
-import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.entity.Player
+import org.bukkit.World
+import org.bukkit.command.*
 
-public class RepairCommand implements CommandExecutor {
-    @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        System.out.println("!!! Repair plugin: " + sender.getClass() + " : " + sender);
-        if (sender instanceof Player) {
-            repair(((Player) sender));
+class RepairCommand : CommandExecutor {
+    override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<String>): Boolean {
+        println("!!! Repair plugin: " + sender.javaClass + " : " + sender)
+        if (sender is Player) {
+            repair(sender)
         }
-        if (sender instanceof BlockCommandSender) {
-            Block block = ((BlockCommandSender) sender).getBlock();
-            World world = block.getWorld();
-            for (Entity e : world.getNearbyEntities(block.getLocation(), 2.0, 2.0, 2.0)) {
-                if (e instanceof Player) {
-                    repair((Player) e);
+        if (sender is BlockCommandSender) {
+            val block = sender.block
+            val world = block.world
+            for (e in world.getNearbyEntities(block.location, 2.0, 2.0, 2.0)) {
+                if (e is Player) {
+                    repair(e)
                 }
             }
         }
         //player.getItemOnCursor().setDurability((short) 0);
-        return true;
+        return true
     }
 
-    private void repair(Player player) {
-        System.out.println("    !!! Repair plugin player: " + player);
-        player.getItemInHand().setDurability((short) 0);
+    private fun repair(player: Player) {
+        println("    !!! Repair plugin player: $player")
+        player.itemInHand.durability = 0.toShort()
     }
 }
