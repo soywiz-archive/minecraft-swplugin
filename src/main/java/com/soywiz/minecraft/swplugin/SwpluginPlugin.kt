@@ -82,23 +82,33 @@ class SwpluginPlugin : JavaPlugin() {
                 }
             }
         }
+        command("remember_priv") {
+            executor {
+                val player = sender as Player
+                if (args.isNotEmpty()) {
+                    val name = args[0]
+                    places.setPlace(name, player.location, player)
+                    sender.sendMessage("Remembered '$name' (${player.location.toIntPosString()}) only for ${player.displayName}")
+                }
+            }
+        }
         command("forget") {
-            completer { places.listPlaces() }
+            completer { places.listPlaces(sender as? Player?) }
             executor {
                 if (args.isNotEmpty()) {
                     val name = args[0]
-                    places.removePlace(name)
+                    places.removePlace(name, sender as? Player?)
                     sender.sendMessage("Forgot place '$name'")
                 }
             }
         }
         command("go") {
-            completer { places.listPlaces() }
+            completer { places.listPlaces(sender as? Player?) }
             executor {
                 val player = sender as Player
                 if (args.isNotEmpty()) {
                     val name = args[0]
-                    val location = places.getPlace(name)
+                    val location = places.getPlace(name, sender as? Player?)
                     if (location != null) {
                         player.teleport(location)
                     } else {
@@ -111,7 +121,7 @@ class SwpluginPlugin : JavaPlugin() {
         }
         command("places") {
             executor {
-                senderPlayer?.sendMessage("Places: " + places.listPlaces().joinToString(", "))
+                senderPlayer?.sendMessage("Places: " + places.listPlaces(sender as? Player?).joinToString(", "))
             }
         }
     }

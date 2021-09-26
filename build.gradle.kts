@@ -4,8 +4,8 @@ import dev.ethp.bukkit.gradle.extension.*
 
 plugins {
     id("java")
-    id("dev.ethp.bukkit") version "0.2.2"
-    id("org.jetbrains.kotlin.jvm") version "1.4.21"
+    id("dev.ethp.bukkit") version "0.2.5"
+    id("org.jetbrains.kotlin.jvm") version "1.5.31"
     id("idea")
 }
 
@@ -79,6 +79,11 @@ bukkit {
     command("remember") {
         description("Saves the current position with a name")
         usage("Usage: /remember <name>")
+    }
+
+    command("remember_priv") {
+        description("Saves the current position with a name (only for the current player)")
+        usage("Usage: /remember_priv <name>")
     }
 
     command("forget") {
