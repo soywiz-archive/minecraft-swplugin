@@ -100,6 +100,11 @@ bukkit {
         description("Lists all available places to go")
         usage("Usage: /places")
     }
+
+    command("places_priv") {
+        description("Lists private available places to go")
+        usage("Usage: /places_priv")
+    }
 }
 
 

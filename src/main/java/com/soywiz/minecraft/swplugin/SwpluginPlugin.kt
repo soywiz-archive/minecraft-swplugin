@@ -86,9 +86,15 @@ class SwpluginPlugin : JavaPlugin() {
             executor {
                 val player = sender as Player
                 if (args.isNotEmpty()) {
-                    val name = args[0]
-                    places.setPlace(name, player.location, player)
-                    sender.sendMessage("Remembered '$name' (${player.location.toIntPosString()}) only for ${player.displayName}")
+                    val userPlaces = places.listPlacesOnlyUser(sender as? Player?)
+                    val NUM_PRIV_PLACES = if (player.isOp) 20 else 2
+                    if (userPlaces.size > NUM_PRIV_PLACES) {
+                        val name = args[0]
+                        places.setPlace(name, player.location, player)
+                        sender.sendMessage("Remembered '$name' (${player.location.toIntPosString()}) only for ${player.displayName}")
+                    } else {
+                        sender.sendMessage("Can't have more privately remembered places. MAXIMUM=$NUM_PRIV_PLACES op=${player.isOp}")
+                    }
                 }
             }
         }
@@ -122,6 +128,11 @@ class SwpluginPlugin : JavaPlugin() {
         command("places") {
             executor {
                 senderPlayer?.sendMessage("Places: " + places.listPlaces(sender as? Player?).joinToString(", "))
+            }
+        }
+        command("places_priv") {
+            executor {
+                senderPlayer?.sendMessage("Places: " + places.listPlacesOnlyUser(sender as? Player?).joinToString(", "))
             }
         }
     }

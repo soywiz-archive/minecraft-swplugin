@@ -36,6 +36,14 @@ class PlacesService(val plugin: SwpluginPlugin) {
         list.addAll(plugin.config.getConfigurationSection(getRootKey())?.getKeys(false)?.toList() ?: listOf())
 
         if (player != null) {
+            list.addAll(listPlacesOnlyUser(player))
+        }
+        return list
+    }
+
+    fun listPlacesOnlyUser(player: Player? = null): List<String> {
+        val list = arrayListOf<String>()
+        if (player != null) {
             list.addAll(plugin.config.getConfigurationSection(getRootKey(player))?.getKeys(false)?.toList() ?: listOf())
         }
         return list
